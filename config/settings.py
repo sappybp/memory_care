@@ -16,7 +16,7 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -102,8 +102,8 @@ TIME_INPUT_FORMATS = ['%H:%M']
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 #createsuperuser
