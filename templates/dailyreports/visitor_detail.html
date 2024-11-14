@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="page_fade_in dailyreport_view">
+    {% csrf_token %}
+    <h1>{{ visitor.tsusho_name }}</h1>
+    <br>
+    <p><span>登録日付：</span><br>{{ visitor.toroku_date }}</p>
+    <div class="field_border"></div>
+    <p><span>更新日付：</span><br>{{ visitor.update_date }}</p>
+    <div class="field_border"></div>
+    <br>
+    <p><span>通所者生年月日：</span><br>{{ visitor.tsusho_seinengappi }}</p>
+    <div class="field_border"></div>
+    {% if visitor.tsusho_seibetsu == 0 %}
+        <p><span>通所者性別：</span><br>未回答</p>
+    {% elif visitor.tsusho_seibetsu == 1 %}
+        <p><span>通所者性別：</span><br>男性</p>
+    {% elif visitor.tsusho_seibetsu == 2 %}
+        <p><span>通所者性別：</span><br>女性</p>
+    {% elif visitor.tsusho_seibetsu == 3 %}
+        <p><span>通所者性別：</span><br>回答しない</p>
+    {% endif %}
+        <div class="field_border"></div>
+    <p><span>通所者電話番号：</span><br>{{ visitor.tsusho_phone }}</p>
+    <div class="field_border"></div>
+    <p><span>通所者メールアドレス：</span><br>{{ visitor.tsusho_email }}</p>
+    <div class="field_border"></div>
+    <p><span>保護者氏名：</span><br>{{ visitor.hogo_name }}</p>
+    <div class="field_border"></div>
+    <p><span>保護者電話番号：</span><br>{{ visitor.hogo_phone }}</p>
+    <div class="field_border"></div>
+    <p><span>保護者メールアドレス：</span><br>{{ visitor.hogo_email }}</p>
+    <div class="field_border"></div>
+    <p><span>特記内容：</span><br>{{ visitor.tokki_naiyo }}</p>
+    <div class="field_border"></div>
+    <div class="form_control">
+        <a href="{% url 'dailyreports:visitor_index' %}">一覧</a>
+        <a href="{% url 'dailyreports:visitor_update' visitor.id %}">編集</a>
+        <a href="{% url 'dailyreports:visitor_delete_confirm' visitor.id %}">削除</a>
+    </div>
+</div>
+{% endblock %}

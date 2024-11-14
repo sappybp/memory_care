@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body%}
+{% load static %}
+<div class="page_fade_in">
+    <div class="main_visual">
+        <div class="title_container">
+            <p class="title font-Itim">Memory</p>
+            <p class="title font-Itim">Care</p>
+            <div class="title_detail">
+                <p>日々の介護、福祉業務</p>
+                <p>その記録と経験を貯めてもっと効率よく、効果的に</p>
+            </div>
+            <div class="title_app">
+                <p><a href="#" onclick="gathering();" class="app" >MemoryCareへ</a></p>
+            </div>
+        </div>
+        <ul class="letter_container">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_1">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_2">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_3">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_4">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_5">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_6">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_7">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_8">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_9">
+            <img src="{% static 'images/letter.png' %}" width="50" height="50" alt="letter" class="img_10">
+        </ul>
+    </div>
+    <a href="{% url 'dailyreports:my_page' %}" class="link" ></a>
+</div>
+{% endblock %}

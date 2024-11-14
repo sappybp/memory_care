@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" type="image/png" href="{% static 'icon/mc.png' %}">
+
+        <title>Memory_Care</title>
+
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/_nav_sidebar_style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/_popup_style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/_clock_style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/_service_style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/_style.css' %}">
+        {% block css %}
+        {% endblock %}
+
+    </head>
+    <body>
+        {% block body %}
+            {% include "_nav_sidebar.html" %}
+            <div class="bg">
+                {% include "_popup.html" %}
+                <div class="main_contents">
+                    {% block main %}
+                        <p>※コンテンツがありません。</p>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <!-- Custom JS -->
+        <script src="{% static 'js/_am_update_btn.js' %}"></script>
+        <script src="{% static 'js/_service.js' %}"></script>
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>

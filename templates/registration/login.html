@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="registration">
+    <h1>ログイン</h1>
+    <div class="page_fade_in">
+        <div class="form-design">
+            {% include "_form.html" with submit_label="ログイン" %}
+            <br>
+            <p>※ユーザー登録がまだの方は以下のサインアップから新規登録が可能です。</p>
+            <div class="btn_form form_left_alignment">
+                <input type="button" id="btn_form_btn1" onclick="location.href='{% url "signup" %}'">
+                <label for="btn_form_btn1" class="margin_0"><a>サインアップ</a></label>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

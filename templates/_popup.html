@@ -1,0 +1,21 @@
+{% for msg in messages %}
+    {% if msg.tags != 'info' %}
+        <input type="checkbox" id="popup" value="on" checked>
+
+        <!-- ポップアップ部分 -->
+        <div id="overlay">
+            <label for="popup" id="bg_gray"></label> <!-- ウィンドウの外のグレーの領域 -->
+
+            <div id="window"> <!-- ウィンドウ部分 -->
+                <label for="popup" id="btn_cloth"> <!-- 閉じるボタン -->
+                    <span></span>
+                </label>
+                <div id="msg"> <!-- ウィンドウのコンテンツ -->
+                    <h2><i class="fa-solid fa-circle-info"></i>INFO</h2>
+                    <br>
+                    <p>{{ msg }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

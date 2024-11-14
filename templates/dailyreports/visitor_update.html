@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="page_fade_in form_design">
+    <form method="post">
+        {% csrf_token %}
+        {% for form_field in form %}
+        <div class="field_design">
+            <span class="field_label">
+                {{ form_field.label }}：
+            </span>
+            {% if form_field.errors %}
+                <div class="error_messages">
+                    {{ form_field.errors }}
+                </div>
+            {% endif %}
+            <div class="field_input">
+            {% if form_field.help_text %}
+                {{ form_field }}<span class="field_help_text">{{ form_field.help_text }}5000文字以内、必須</span>
+            {% else %}
+                {{ form_field }}
+            {% endif %}
+            </div>
+            <div class="field_border"></div>
+        </div>
+        {% endfor %}
+        <div class="btn_form">
+            <input type="submit" id="btn_form_btn1">{% csrf_token %}
+            <label for="btn_form_btn1"><a>更新</a></label>
+            <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:visitor_detail" visitor.id %}'">
+            <label for="btn_form_btn2"><a>取消</a></label>
+        </div>
+    </form>
+</div>
+{% endblock %}

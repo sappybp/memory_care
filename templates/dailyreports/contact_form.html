@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>お問い合わせ</h1>
+<div class="page_fade_in">
+    <div class="contact_form">
+        <form action="{% url 'dailyreports:contact_send' %}" method="post">
+            {% csrf_token %}
+            <div class="feedback-container">
+                <label name="name">お名前</label>
+                <input name="name" type="text" class="feedback-input" maxlength="30" required>   
+            </div>
+            <div class="feedback-container">
+                <label name="name">メールアドレス</label>
+                <input name="email" type="email" class="feedback-input" maxlength="50" required>
+            </div>
+            <div class="feedback-container">
+                <label name="name">件名/要約</label>
+                <input name="subject" type="text" class="feedback-input" maxlength="50" required>
+            </div>
+            <div class="feedback-container">
+                <label name="name">お問い合わせ内容/バグ改善/希望、要望</label>
+                <textarea name="message" class="feedback-input" maxlength="5000" required></textarea>
+            </div>
+            <div class="btn_form">
+                <input type="submit" id="btn_form_btn1">{% csrf_token %}
+                <label for="btn_form_btn1"><a>送信</a></label>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

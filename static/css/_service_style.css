@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+.main_visual {
+  overflow:  hidden;
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: beige;
+  /* height: 100vh; */
+  /* background: linear-gradient(white, 99%, rgb(255, 152, 204)); */
+  /* background: linear-gradient(white, 90%, rgb(255, 152, 204)); */
+}
+.title_container{
+  display: block;
+  text-align: center;
+  margin: 10% 0;
+}
+.font-Itim{
+  font-family: 'Itim', cursive;
+}
+.title_container p.title{
+  font-size: 5rem;
+  line-height: 100%;
+  color: #ff701e;
+}
+.title_container .title_detail{
+  margin: 1% 0;
+}
+.title_container .title_app{
+  margin: 1% 0;
+}
+.letter_container img{
+  position: absolute;
+  z-index: -1;
+  top: -50px;
+}
+.letter_container .img_1{
+  left: 0%;
+  animation: fall 10s linear infinite,
+             sway1 3s ease-in-out infinite alternate;
+  animation-delay: 2s;
+}
+.letter_container .img_2{
+  left: 5%;
+  animation: fall 15s linear infinite,
+             sway1 2s ease-in-out infinite alternate;
+  animation-delay: 8s;
+}
+.letter_container .img_3{
+  left: 15%;
+  animation: fall 9s linear infinite,
+             sway1 3.5s ease-in-out infinite alternate;
+  animation-delay: 13s;
+}
+.letter_container .img_4{
+  left: 30%;
+  animation: fall 8s linear infinite,
+             sway2 4s ease-in-out infinite alternate;
+  animation-delay: 7s;
+}
+.letter_container .img_5{
+  left: 40%;
+  animation: fall 10s linear infinite,
+             sway1 4s ease-in-out infinite alternate;
+  animation-delay: 0s;
+}
+.letter_container .img_6{
+  left: 50%;
+  animation: fall 7s linear infinite,
+             sway1 3s ease-in-out infinite alternate;
+  animation-delay: 3s;
+}
+.letter_container .img_7{
+  left: 55%;
+  animation: fall 11s linear infinite,
+             sway2 3s ease-in-out infinite alternate;
+  animation-delay: 3s;
+}
+.letter_container .img_8{
+  left: 65%;
+  animation: fall 7s linear infinite,
+             sway2 3.5s ease-in-out infinite alternate;
+  animation-delay: 7s;
+}
+.letter_container .img_9{
+  left: 80%;
+  animation: fall 10s linear infinite,
+             sway2 4s ease-in-out infinite alternate;
+  animation-delay: 4s;
+}
+.letter_container .img_10{
+  left: 90%;
+  animation: fall 6s linear infinite,
+             sway2 6s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+.link{
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  visibility: hidden;
+}
+
+.gathering {
+  animation: gathering 1s linear forwards;
+}
+
+.shaking {
+  animation: shaking 0.1s;
+  animation-iteration-count: 5;
+}
+
+.invisible{
+  animation: invisible 1s forwards;
+}
+
+/* サイズ調整 */
+/* @media screen and (max-height: 600px) {
+  .footer {
+    display: none;
+  }
+} */
+
+@keyframes fall {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+@keyframes sway1 {
+  from {
+      transform: translateX(0px) rotate(0deg);
+  }
+  to {
+      transform: translateX(200px) rotate(-45deg);
+  }
+}
+
+@keyframes sway2 {
+  from {
+      transform: translateX(200px) rotate(-45deg);
+  }
+  to {
+      transform: translateX(0px) rotate(0deg);
+  }
+}
+
+@keyframes gathering {
+  to {
+    display: block;
+    top: 48%;
+    left: 48%;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+}
+
+@keyframes shaking {
+  0% {transform: translate(0px, 0px) rotateZ(0deg)}
+  25% {transform: translate(2px, 2px) rotateZ(1deg)}
+  50% {transform: translate(0px, 2px) rotateZ(0deg)}
+  75% {transform: translate(2px, 0px) rotateZ(-1deg)}
+  100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}
+
+@keyframes invisible {
+  from{
+    opacity: 1;
+  }
+  to {
+    display: none;
+    opacity: 0;
+  }
+}

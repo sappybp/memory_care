@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<div class="page_fade_in">
+    <h1>マイページ</h1>
+    <p>ユーザー：{{ user }}</p>
+    {% if user.on_work == False %}
+    <p class="pink">退勤中</p>
+    {% else %}
+    <p class="blue">勤務中</p>
+    {% endif %}
+    <br>
+    <div class="clock-container">
+        <div class="clock">
+            {% if user.on_work == False %}
+                <p class="clock-date clock_pink">---------- ---</p>
+                <p class="clock-time clock_pink">--------</p>
+            {% else %}
+                <p class="clock-date clock_blue">---------- ---</p>
+                <p class="clock-time clock_blue">--------</p>
+            {% endif %}
+        </div>
+        <div class="clock_form">
+            {% if user.on_work == False %}
+                <form action="{% url 'dailyreports:update_on_work' user.id 0 %}" method="post">
+                    <div class="on_work_form">
+                        <input type="submit" id="shukkin_form_btn">{% csrf_token %}
+                        <label for="shukkin_form_btn"><a>出勤</a></label>
+                        <input type="button" id="taikin_form_btn" disabled>
+                        <label  class="black" for="taikin_form_btn"><a>退勤</a></label>
+                    </div>
+                </form>
+            {% else %}
+                <form action="{% url 'dailyreports:update_on_work' user.id 1 %}" method="post">
+                    <div class="on_work_form">
+                        <input type="button" id="shukkin_form_btn" disabled>
+                        <label class="black" for="shukkin_form_btn"><a>出勤</a></label>
+                        <input type="submit" id="taikin_form_btn">{% csrf_token %}
+                        <label for="taikin_form_btn"><a>退勤</a></label>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    <div class="my_page_dailyreport_view">
+        <h3>最近作成した日中報告</h3>
+        {% if dailyreport_list %}
+            {% for dailyreport in dailyreport_list %}
+            <div class="container">
+                <a href="{% url 'dailyreports:dailyreport_detail' dailyreport.id %}">
+                    <div class="box">
+                        <p class="tokki_naiyo">{{ dailyreport.tokki_naiyo| truncatechars:80  }}</p>
+                        <div class="name_box">
+                            <div class="tsusho">
+                                <img src="{% static 'images/mc.png' %}" width="50" height="50" alt="photo">
+                                <p class="tsusho_name">{{ dailyreport.visitor.tsusho_name }}</p>
+                            </div>
+                            <ul>
+                                <li>
+                                    <p>担当者：{{dailyreport.tanto.full_name}}</p>
+                                </li>
+                                <li>
+                                    <p>登録日付：{{ dailyreport.toroku_date }}</p>
+                                </li>
+                                <li>
+                                    <p>更新日時：{{ dailyreport.update_date }}</p>  
+                                </li>
+                            </ul>
+                        </div>   
+                    </div> 
+                </a>
+            </div>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1" style="font-size: 1.5rem;">&laquo;</a>
+                        <a href="?page={{ page_obj.previous_page_number }}" style="font-size: 1.1rem;">&lt;</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        ページ {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    </span>
+            
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" style="font-size: 1.1rem;">&gt;</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}" style="font-size: 1.5rem;">&raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            <p>該当の日中報告はありません。</p>
+        {% endif %}
+    </div>
+    <div class="control_container">
+        {% if user.authority == 4 %}
+        <div class="control_box">
+            <h3>管理者項目</h3>
+            <div class="btn_form form_left_alignment">
+                <input type="button" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_create_form" %}'">
+                <label for="btn_form_btn1" class="margin_0"><a>従業員情報作成</a></label>
+            </div>
+            <div class="btn_form form_left_alignment">
+                <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:visitor_create_form" %}'">
+                <label for="btn_form_btn2" class="margin_0"><a>通所者情報作成</a></label>
+            </div>
+        </div>
+        {% endif %}
+        <div class="control_box">
+            <h3>アカウント項目</h3>
+            <div class="btn_form form_left_alignment">
+                <input type="button" id="btn_form_btn3" onclick="location.href='{% url "password_change" %}'">
+                <label for="btn_form_btn3" class="margin_0"><a>パスワード変更</a></label>
+            </div>
+            <div class="btn_form form_left_alignment">
+                <input type="button" id="btn_form_btn4" onclick="location.href='{% url "password_reset" %}'">
+                <label for="btn_form_btn4" class="margin_0"><a>パスワードを忘れた場合</a></label>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/_clock.js' %}"></script>
+{% endblock %}

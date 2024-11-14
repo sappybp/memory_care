@@ -1,0 +1,42 @@
+<!-- toggle section -->
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+<!-- sidebar section -->
+<div class="sidebar">
+    <header class="font-Itim">Memory Care</header>
+    <ul>
+        <li>
+            <a href="{% url 'dailyreports:my_page' %}" id="nav_sidebar_link"><i class="fa-brands fa-pagelines"></i>マイページ</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:dailyreport_create_form' %}" id="nav_sidebar_link"><i class="fa-solid fa-file"></i>新規報告書作成</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:dailyreport_index' %}" id="nav_sidebar_link"><i class="fa-solid fa-folder-open"></i>日中報告リスト</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:visitor_index' %}" id="nav_sidebar_link"><i class="fa-solid fa-users"></i>通所者リスト</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:user_index' %}" id="nav_sidebar_link"><i class="fa-solid fa-people-group"></i></i>従業員リスト</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:am_index' %}" id="nav_sidebar_link"><i class="fa-solid fa-clipboard-user"></i>勤怠情報</a>
+        </li>
+        <li>
+            <a href="{% url 'index' %}" id="nav_sidebar_link"><i class="fa-regular fa-heart"></i>サービス</a>
+        </li>
+        <li>
+            <a href="{% url 'dailyreports:contact_form' %}" id="nav_sidebar_link"><i class="fas fa-envelope"></i>お問い合わせ</a>
+        </li>
+    </ul>
+    <br>
+    <form action='{% url "logout" %}' method='post' name="logout" class="logout_form" id="nav_sidebar_link">
+        {% csrf_token %}
+        <a href="javascript:logout.submit()">ログアウト</a>
+    </form>
+    <br>
+</div>

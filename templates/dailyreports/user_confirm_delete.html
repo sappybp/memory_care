@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="page_fade_in">
+    <h3>以下の 「{{ object }}」さんの通所者情報を本当に削除しますか?</h3>
+    <br>
+    <div class="dailyreport_view">
+        <h1>{{ user.full_name }}</h1>
+        <br>
+        <p><span>登録日：</span><br>{{ user.date_joined }}</p>
+        <div class="field_border"></div>
+        <p><span>更新日：</span><br>{{ user.update_date }}</p>
+        <div class="field_border"></div>
+        <br>
+        <p><span>ユーザー名：</span><br>{{ user.username }}</p>
+        <div class="field_border"></div>
+        <p><span>勤務中：</span><br>{{ user.on_work }}</p>
+        <div class="field_border"></div>
+        <p><span>生年月日：</span><br>{{ user.birth }}</p>
+        <div class="field_border"></div>
+        {% if user.gender == 0 %}
+            <p><span>性別：</span><br>未回答</p>
+        {% elif user.gender == 1 %}
+            <p><span>性別：</span><br>男性</p>
+        {% elif user.gender == 2 %}
+            <p><span>性別：</span><br>女性</p>
+        {% elif user.gender == 3 %}
+            <p><span>性別：</span><br>回答しない</p>
+        {% endif %}
+        <div class="field_border"></div>
+        <p><span>電話番号：</span><br>{{ user.phone }}</p>
+        <div class="field_border"></div>
+        <p><span>メールアドレス：</span><br>{{ user.email }}</p>
+        <div class="field_border"></div>
+        <p><span>自己紹介：</span><br>{{ user.introduction }}</p>
+        <div class="field_border"></div>
+        {% if user.contract_type == 0 %}
+            <p><span>雇用形態：</span><br>正社員</p>
+        {% elif user.contract_type == 1 %}
+            <p><span>雇用形態：</span><br>契約社員</p>
+        {% elif user.contract_type == 2 %}
+            <p><span>雇用形態：</span><br>アルバイト</p>
+        {% elif user.contract_type == 3 %}
+            <p><span>雇用形態：</span><br>パート社員</p>
+        {% elif user.contract_type == 4 %}
+            <p><span>雇用形態：</span><br>派遣社員</p>
+        {% elif user.contract_type == 5 %}
+            <p><span>雇用形態：</span><br>その他</p>
+        {% endif %}
+        {% if user.authority == 0 %}
+            <p><span>権限：</span><br>ゲスト</p>
+        {% elif user.authority == 1 %}
+            <p><span>権限：</span><br>閲覧</p>
+        {% elif user.authority == 2 %}
+            <p><span>権限：</span><br>閲覧作成</p>
+        {% elif user.authority == 3 %}
+            <p><span>権限：</span><br>閲覧作成削除</p>
+        {% elif user.authority == 4 %}
+            <p><span>権限：</span><br>閲覧作成削除管理</p>
+        {% endif %}
+        <div class="field_border"></div>
+        <form>
+            <div class="btn_form">
+                {% csrf_token %}
+                <input type="submit" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_delete_data" user.id %}'">
+                <label for="btn_form_btn1"><a>削除</a></label>
+                <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:user_detail" user.id %}'">
+                <label for="btn_form_btn2"><a>取消</a></label>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

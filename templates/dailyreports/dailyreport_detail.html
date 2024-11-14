@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="page_fade_in dailyreport_view">
+    {% csrf_token %}
+    <h1>{{ dailyreport.visitor.tsusho_name }}</h1>
+    <br>
+    <p><span>登録日付：</span><br>{{ dailyreport.toroku_date }}</p>
+    <div class="field_border"></div>
+    <p><span>更新日付：</span><br>{{ dailyreport.update_date }}</p>
+    <div class="field_border"></div>
+    <br>
+    <p><span>担当者：</span><br>{{ dailyreport.tanto.full_name }}</p>
+    <div class="field_border"></div>
+    <p><span>特記内容：</span><br>{{ dailyreport.tokki_naiyo }}</p>
+    <div class="field_border"></div>
+    {% if dailyreport.tsusho_unagashi is False %}
+        <p><span>通所促し：</span><br> ×</p>
+    {% else %}
+        <p><span>通所促し：</span><br> ○</p>
+    {% endif %}
+        <div class="field_border"></div>
+        <p><span>体調面：</span><br>{{ dailyreport.taityomen }}</p>
+        <div class="field_border"></div>
+    {% if dailyreport.haisetsu == 0 %}
+        <p><span>排泄：</span><br>未</p>
+    {% elif dailyreport.haisetsu == 1 %}
+        <p><span>排泄：</span><br>小</p>
+    {% elif dailyreport.haisetsu == 2 %}
+        <p><span>排泄：</span><br>中</p>
+    {% elif dailyreport.haisetsu == 3 %}
+        <p><span>排泄：</span><br>大</p>
+    {% endif %}
+        <div class="field_border"></div>
+    {% if dailyreport.kenon_1 %}
+        <p><span>午前11:00頃の体温：</span><br>{{ dailyreport.kenon_1 }} ℃</p>
+    {% else %}
+        <p><span>午前11:00頃の体温：</span><br>{{ dailyreport.kenon_1 }}</p>
+    {% endif %}
+    {% if dailyreport.kenon_1 %}
+        <p><span>午前15:00頃の体温：</span><br>{{ dailyreport.kenon_2 }} ℃</p>
+    {% else %}
+        <p><span>午前15:00頃の体温：</span><br>{{ dailyreport.kenon_2 }}</p>
+    {% endif %}
+        <div class="field_border"></div>
+    <p><span>昼食：</span><br>{{ dailyreport.chushoku }}</p>
+    <div class="field_border"></div>
+    <p><span>水分：</span><br>{{ dailyreport.suibun }}</p>
+    <div class="field_border"></div>
+    <p><span>送迎_１：</span><br>{{ dailyreport.sogei_1 }}</p>
+    <p><span>送迎_２：</span><br>{{ dailyreport.sogei_2 }}</p>
+    <div class="field_border"></div>
+    {% if dailyreport.shozai_jikan_1 is None and dailyreport.shozai_jikan_2 is None %}
+        <p><span>所在時間：</span><br>　　~　　</p>
+    {% else %}
+        <p><span>所在時間：</span><br>{{ dailyreport.shozai_jikan_1 }} ~ {{ dailyreport.shozai_jikan_2 }}</p>
+    {% endif %}
+    <div class="field_border"></div>
+    {% if dailyreport.denwa_shien_1 is False %}
+        <p><span>電話支援（9時10分）：</span><br>×</p>
+    {% else %}
+        <p><span>電話支援（9時10分）：</span><br>○</p>
+    {% endif %}
+    {% if dailyreport.denwa_shien_2 is False %}
+        <p><span>電話支援（15時50分）：</span><br>×</p>
+    {% else %}
+        <p><span>電話支援（15時50分）：</span><br>○</p>
+    {% endif %}
+    <div class="field_border"></div>
+    {% if dailyreport.kesseki is False %}
+        <p><span>欠席：</span><br>×</p>
+    {% else %}
+        <p><span>欠席：</span><br>○</p>
+    {% endif %}
+    <div class="field_border"></div>
+    {% if dailyreport.kesseki_kasan is False %}
+        <p><span>欠席加算：</span><br>×</p>
+    {% else %}
+        <p><span>欠席加算：</span><br>○</p>
+    {% endif %}
+    <div class="field_border"></div>
+    <div class="form_control">
+        <a href="{% url 'dailyreports:dailyreport_index' %}">一覧</a>
+        <a href="{% url 'dailyreports:dailyreport_update' dailyreport.id %}">編集</a>
+        <a href="{% url 'dailyreports:dailyreport_delete' dailyreport.id %}">削除</a>
+    </div>
+</div>
+{% endblock %}

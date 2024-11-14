@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="registration">
+    <h1>サインアップ（新規登録）</h1>
+    <div class="page_fade_in">
+        {% include "_form.html" with submit_label="登録" %}
+    </div>
+    <br>
+    <div class="btn_form form_left_alignment">
+        <input type="button" id="btn_form_btn1" onclick="location.href='{% url "login" %}'">
+        <label for="btn_form_btn1" class="margin_0"><a>ログインへ</a></label>
+    </div>
+</div>
+{% endblock %}

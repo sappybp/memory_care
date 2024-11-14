@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block main %}
+{% load static %}
+<h1>日中報告書一覧</h1>
+<form method="get">
+    <input class= "search_input" type="search" value="{{ request.GET.query }}" 
+            name="query" type="text" 
+            placeholder=" 検索ワードを入力 ">
+    <button class="search_btn" type="submit">検索</button>
+</form>
+{% for msg in messages %}
+    {% if msg.tags == 'info' %}
+        <p class= "search_message {{ msg.tags }}">"{{ msg }}" を含む検索結果:</p>
+    {% endif %}
+{% endfor %}
+<div class="page_fade_in">
+    {% if dailyreport_list %}
+        {% for dailyreport in dailyreport_list %}
+        <div class="container">
+            <a href="{% url 'dailyreports:dailyreport_detail' dailyreport.id %}">
+                <div class="box">
+                    <p class="tokki_naiyo">{{ dailyreport.tokki_naiyo| truncatechars:80  }}</p>
+                    <div class="name_box">
+                        <div class="tsusho">
+                            <img src="{% static 'images/mc.png' %}" width="50" height="50" alt="photo">
+                            <p class="tsusho_name">{{ dailyreport.visitor.tsusho_name }}</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <p>担当者：{{dailyreport.tanto.full_name}}</p>
+                            </li>
+                            <li>
+                                <p>登録日付：{{ dailyreport.toroku_date }}</p>
+                            </li>
+                            <li>
+                                <p>更新日時：{{ dailyreport.update_date }}</p>  
+                            </li>
+                        </ul>
+                    </div>   
+                </div> 
+            </a>
+        </div>
+        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1" style="font-size: 1.5rem;">&laquo;</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" style="font-size: 1.1rem;">&lt;</a>
+                {% endif %}
+        
+                <span class="current">
+                    ページ {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" style="font-size: 1.1rem;">&gt;</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" style="font-size: 1.5rem;">&raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <p>該当の日中報告はありません。</p>
+    {% endif %}
+</div>
+
+{% endblock %}
