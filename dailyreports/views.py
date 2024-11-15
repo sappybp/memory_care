@@ -28,17 +28,15 @@ class DailyreportIndexView(generic.ListView):
 
         if query:
             queryset = Dailyreport.objects.filter(
-                Q(tanto__username__icontains=query) |
-                Q(tanto__last_name__icontains=query) |
-                Q(tanto__first_name__icontains=query) |
+                Q(tanto__full_name__icontains=query) |
                 Q(visitor__tsusho_name__icontains=query) |
                 Q(tokki_naiyo__icontains=query)
-            ).order_by('-toroku_date')
+            ).order_by("-toroku_date")
 
             messages.info(self.request, query) #　検索結果メッセージ
 
         else:
-            queryset = Dailyreport.objects.all().order_by('-toroku_date')
+            queryset = Dailyreport.objects.all().order_by("-toroku_date")
 
         return queryset
 
@@ -112,13 +110,15 @@ class VisitorIndexView(generic.ListView):
             queryset = Visitor.objects.filter(
                 Q(tsusho_name__icontains=query) |
                 Q(hogo_name__icontains=query) |
+                Q(tsusho_phone__icontains=query) |
+                Q(tsusho_email__icontains=query) |
                 Q(tokki_naiyo__icontains=query)
-            ).order_by('-toroku_date')
+            ).exclude(is_active=False).order_by('-toroku_date')
 
             messages.info(self.request, query) #　検索結果メッセージ
         else:
 
-            queryset = Visitor.objects.all().order_by('-toroku_date')
+            queryset = Visitor.objects.all().exclude(is_active=False).order_by('-toroku_date')
 
         return queryset
 
@@ -214,14 +214,14 @@ class UserIndexView(generic.ListView):
             queryset = User.objects.filter(
                 Q(username__icontains=query) |
                 Q(full_name__icontains=query) |
-                Q(contract_type__icontains=query) |
-                Q(authority__icontains=query)
-            ).order_by('-date_joined')
+                Q(email__icontains=query) |
+                Q(phone__icontains=query)
+            ).exclude(is_active=False).order_by('-on_work', '-date_joined')
 
             messages.info(self.request, query) #　検索結果メッセージ
 
         else:
-            queryset = User.objects.all().order_by('-date_joined')
+            queryset = User.objects.all().exclude(is_active=False).order_by('-on_work', '-date_joined')
 
         return queryset
 
