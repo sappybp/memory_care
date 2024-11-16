@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>従業員新規作成</h1>
+<br>
 <div class="page_fade_in form_design">
     <form action="{% url 'dailyreports:user_create_data' %}" method="post">
         {% csrf_token %}

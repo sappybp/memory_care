@@ -261,11 +261,15 @@ def update_on_work(request, pk, on_work):
         if request.method == 'POST':
             if on_work == 0:
                 user = User.objects.get(id=pk)
+
+                time_now=timezone.localtime()
                 
                 AttendanceManagement.objects.create(
                     user=user,
                     type=0,
-                    time=timezone.localtime()
+                    time=time_now,
+                    toroku_date=time_now,
+                    update_date=time_now
                 )
                 user.on_work = True
                 user.save()
@@ -276,10 +280,14 @@ def update_on_work(request, pk, on_work):
             elif on_work == 1:
                 user = User.objects.get(id=pk)
 
+                time_now=timezone.localtime()
+
                 AttendanceManagement.objects.create(
                     user=user,
                     type=1,
-                    time=timezone.localtime()
+                    time=time_now,
+                    toroku_date=time_now,
+                    update_date=time_now
                 )
                 user.on_work = False
                 user.save()
