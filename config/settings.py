@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import os
+from re import split
 import environ
 from decouple import config
 from dj_database_url import parse as dburl
@@ -16,15 +17,9 @@ env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if env("DEBUG") == "True":
-    DEBUG = True
-elif env("DEBUG") == "False":
-    DEBUG = False
-else:
-    DEBUG = False
+DEBUG = False
 
-
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(",")
 
 # Application definition
 
