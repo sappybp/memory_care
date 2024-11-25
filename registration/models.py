@@ -38,7 +38,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         serialize=False,
         verbose_name='ID'
     )
-    password = models.CharField(max_length=128, verbose_name='パスワード')
+    password = models.CharField(
+            max_length=128,
+            help_text='パスワードは最低8文字以上必要です。よく使われるパスワードや数字だけのパスワード、あなたの他の個人情報と似ているパスワードは設定できません。',
+            verbose_name='パスワード'
+    )
     last_login = models.DateTimeField(blank=True, null=True, verbose_name='最終ログイン')
     is_superuser = models.BooleanField(
         default=False,
@@ -80,7 +84,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         (4, 'ユーザー作成削除'),
     )
     authority = models.IntegerField(default=0,choices=AUTHORITY_TYPE_CHOICES, verbose_name='権限')
-    email = models.EmailField(max_length=254, unique=True, verbose_name='メールアドレス')
+    email = models.EmailField(max_length=128, unique=True, verbose_name='メールアドレス')
     phone = models.CharField(max_length=11, blank=True, null=True, verbose_name='電話番号')
     introduction = models.TextField(max_length=500, blank=True, null=True, verbose_name='自己紹介')
     is_staff = models.BooleanField(default=False,

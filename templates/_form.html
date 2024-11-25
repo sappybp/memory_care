@@ -3,9 +3,6 @@
         {% csrf_token %}
         {% for form_field in form %}
             <div class="field_design">
-                <span class="field_label">
-                    {{ form_field.label }}：
-                </span>
                 {% if form_field.errors %}
                     <div class="error_messages">
                         {{ form_field.errors }}
@@ -13,9 +10,95 @@
                 {% endif %}
                 <div class="field_input">
                 {% if form_field.help_text %}
-                    {{ form_field }}<span class="field_help_text">{{ form_field.help_text }}</span>
+                    {% if form_field.name|stringformat:"s" == "username" %}
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text"
+                        name="{{ form_field.name }}"
+                        {% if form_field.value %}
+                            value="{{ form_field.value }}"
+                        {% endif %}
+                        autocomplete="{{ form_field.name }}"
+                        maxlength="50"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "password" or form_field.name|stringformat:"s" == "old_password" %}
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password"
+                        name="{{ form_field.name }}"
+                        autocomplete="current-password"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "password1" or form_field.name|stringformat:"s" == "password2" or form_field.name|stringformat:"s" == "new_password1" or form_field.name|stringformat:"s" == "new_password2" %}
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password"
+                        name="{{ form_field.name }}"
+                        autocomplete="new-password"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "email" %}
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email"
+                        name="{{ form_field.name }}"
+                        {% if form_field.value %}
+                            value="{{ form_field.value }}"
+                        {% endif %}
+                        autocomplete="{{ form_field.name }}"
+                        maxlength="128"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    <span class="field_help_text">{{ form_field.help_text }}</span>
                 {% else %}
-                    {{ form_field }}
+                    {% if form_field.name|stringformat:"s" == "username" %}
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text"
+                        name="{{ form_field.name }}"
+                        {% if form_field.value %}
+                            value="{{ form_field.value }}"
+                        {% endif %}
+                        autocomplete="{{ form_field.name }}"
+                        maxlength="50"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "password" or form_field.name|stringformat:"s" == "old_password" %}
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password"
+                        name="{{ form_field.name }}"
+                        autocomplete="current-password"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "password1" or form_field.name|stringformat:"s" == "password2" or form_field.name|stringformat:"s" == "new_password1" or form_field.name|stringformat:"s" == "new_password2" %}
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password"
+                        name="{{ form_field.name }}"
+                        autocomplete="new-password"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
+                    {% if form_field.name|stringformat:"s" == "email" %}
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email"
+                        name="{{ form_field.name }}"
+                        {% if form_field.value %}
+                            value="{{ form_field.value }}"
+                        {% endif %}
+                        autocomplete="{{ form_field.name }}"
+                        aria-describedby="id_{{ form_field.name }}_helptext"
+                        id="id_{{ form_field.name }}"
+                        placeholder=" {{ form_field.label }}" autofocus required>
+                    {% endif %}
                 {% endif %}
                 </div>
                 <div class="field_border"></div>

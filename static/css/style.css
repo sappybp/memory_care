@@ -230,27 +230,35 @@ body{
 }
 .field_design{
   display: block;
-  margin-bottom: 1%;
 }
 .field_label{
   font-size: 0.8rem;
   font-weight: bold;
 }
+.field_input i{
+  font-size: 20px;
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+}
 .field_input input[type="text"]{
   font-size: 1.0rem;
-  width: 100%;
+  line-height: 40px;
+  width: calc( 100% - 30px );
   border: none;
   border-bottom: dashed 1px black;
 }
 .field_input input[type="password"]{
   font-size: 1.0rem;
-  width: 100%;
+  line-height: 40px;
+  width: calc( 100% - 30px );
   border: none;
   border-bottom: dashed 1px black;
 }
 .field_input input[type="email"]{
   font-size: 1.0rem;
-  width: 100%;
+  line-height: 40px;
+  width: calc( 100% - 30px );
   border: none;
   border-bottom: dashed 1px black;
 }
