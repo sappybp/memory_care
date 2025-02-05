@@ -124,7 +124,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "registration.User"
 
-FRONTEND_URL = "http://127.0.0.1:8000/"
+FRONTEND_URL = env('FRONTEND_URL')
 
 # # #メールがshellに届くようにする。開発用
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
