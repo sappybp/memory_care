@@ -12,7 +12,7 @@ from django.contrib import messages #　検索結果のメッセージのため�
 from django.contrib.auth.hashers import make_password #パスワードハッシュ化
 
 from registration.models import User, AttendanceManagement
-from registration.forms import UserForm
+from registration.forms import UserForm, ModifyUserForm
 from .models import Visitor, Dailyreport, Inspection
 from .forms import VisitorForm, DailyreportForm
 
@@ -313,7 +313,7 @@ def update_on_work(request, pk, on_work):
 class UserUpdateView(generic.UpdateView):
     model = User
     template_name = "dailyreports/user_update.html"
-    form_class = UserForm
+    form_class = ModifyUserForm
 
     def get_success_url(self):
         messages.success(self.request, '編集が完了しました。')
@@ -333,7 +333,7 @@ class UserDeleteView(generic.DeleteView):
 def delete_user_data(request, pk):
     try:
         user_id = request.user.id
-        control_user = User.object.get(id=user_id)
+        control_user = User.objects.get(id=user_id)
 
         if control_user.authority == 4:
 
@@ -355,9 +355,9 @@ def delete_user_data(request, pk):
             messages.error(request, '削除権限がありません。')
             return redirect('dailyreports:user_index')
     except:
-        # import sys
-        # messages.error(request, sys.exc_info())
-        messages.error(request, user_id)
+        import sys
+        messages.error(request, sys.exc_info())
+        # messages.error(request, user_id)
         return redirect('dailyreports:user_index')
 
 ###############User###############

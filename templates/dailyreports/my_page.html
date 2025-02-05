@@ -52,7 +52,7 @@
                         <p class="tokki_naiyo">{{ dailyreport.tokki_naiyo| truncatechars:80  }}</p>
                         <div class="name_box">
                             <div class="tsusho">
-                                <img src="{% static 'images/mc.png' %}" width="50" height="50" alt="photo">
+                                <img src="{% static 'icon/user.png' %}" width="50" height="50" alt="photo">
                                 <p class="tsusho_name">{{ dailyreport.visitor.tsusho_name }}</p>
                             </div>
                             <ul>
@@ -93,19 +93,23 @@
         {% endif %}
     </div>
     <div class="control_container">
-        {% if user.authority == 4 %}
         <div class="control_box">
             <h3>管理者項目</h3>
             <div class="btn_form form_left_alignment">
-                <input type="button" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_create_form" %}'">
-                <label for="btn_form_btn1" class="margin_0"><a>従業員情報作成</a></label>
+                <input type="button" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_update" request.user.id %}'">
+                <label for="btn_form_btn1" class="margin_0"><a>マイ情報編集</a></label>
             </div>
-            <div class="btn_form form_left_alignment">
-                <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:visitor_create_form" %}'">
-                <label for="btn_form_btn2" class="margin_0"><a>通所者情報作成</a></label>
-            </div>
+            {% if user.authority == 4 %}
+                <div class="btn_form form_left_alignment">
+                    <input type="button" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_create_form" %}'">
+                    <label for="btn_form_btn1" class="margin_0"><a>従業員情報作成</a></label>
+                </div>
+                <div class="btn_form form_left_alignment">
+                    <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:visitor_create_form" %}'">
+                    <label for="btn_form_btn2" class="margin_0"><a>通所者情報作成</a></label>
+                </div>
+            {% endif %}
         </div>
-        {% endif %}
         <div class="control_box">
             <h3>アカウント項目</h3>
             <div class="btn_form form_left_alignment">

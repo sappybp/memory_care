@@ -62,16 +62,16 @@ def contact_form_send_email(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
         from_email = settings.DEFAULT_FROM_EMAIL
-        recipient_list = [email, settings.SERVER_EMAIL]
+        recipient_list = [email, from_email]
 
         message = name + ":" + email + "\r\n" + message
 
         send_mail(
-                subject=subject,
-                message=message,
-                from_email=from_email,
-                recipient_list= recipient_list,
-                fail_silently=False
+            subject=subject,
+            message=message,
+            from_email=from_email,
+            recipient_list= recipient_list,
+            fail_silently=False
         )
 
         messages.success(request, 'メールが送信されました。入力したメールアドレスにも同じ内容のメールが送信されます。')

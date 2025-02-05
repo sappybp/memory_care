@@ -14,7 +14,7 @@ from .models import User
 User = get_user_model()
 
 
-subject = "登録確認"
+subject = "SignUp"
 message_template = """
 ご登録ありがとうございます。
 以下URLをクリックして登録を完了してください。
@@ -48,11 +48,11 @@ class SignUpForm(UserCreationForm):
             message = message_template + activate_url
             # user.email_user(subject, message)
             send_mail(
-                    subject=subject,
-                    message=message,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list= [user.email],
-                    fail_silently=False
+                subject=subject,
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list= [user.email],
+                fail_silently=False
             )
         return user
         
@@ -94,4 +94,23 @@ class UserForm(forms.ModelForm):
                  years=range(1900, 2041)
             ),
             "password": forms.PasswordInput(),
+        }
+
+class ModifyUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "full_name",
+            "birth",
+            "gender",
+            "phone",
+            "email",
+            "introduction",
+            "on_work",
+        ]
+        widgets = {
+            "birth": forms.SelectDateWidget(
+                 empty_label=("選択してください。"),
+                 years=range(1900, 2041)
+            ),
         }

@@ -17,10 +17,9 @@ activate_email_sent_view = TemplateView.as_view(template_name="registration/acti
 index_view = TemplateView.as_view(template_name="registration/index.html")
 
 urlpatterns = [
-    path("", index_view, name="index"),
     path("staff_administ/", admin.site.urls),
+    path("", index_view, name="index"),
     path("dailyreports/", include("dailyreports.urls")),
-    path("polls/", include("polls.urls")),
     path('', include("django.contrib.auth.urls")),
     path("signup/", views.SignUpView.as_view(), name="signup"),
     path("activate_email_sent/", activate_email_sent_view, name="activate_email_sent"),

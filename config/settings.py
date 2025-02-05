@@ -18,7 +18,6 @@ SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(",")
 
 # Application definition
@@ -32,7 +31,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "dailyreports.apps.DailyreportsConfig",
-    "polls.apps.PollsConfig",
 ]
 
 MIDDLEWARE = [
@@ -122,24 +120,19 @@ LOGOUT_REDIRECT_URL = "/login/"
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # SECURE_SSL_REDIRECT = True
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "registration.User"
 
 FRONTEND_URL = "http://127.0.0.1:8000/"
 
-# ANYMAIL = {
-#     "MAILGUN_API_KEY": "1b5736a5-1408b475",
-#     "MAILGUN_SENDER_DOMAIN": 'sandbox223a86533e4b4620bd7786e779329498.mailgun.org',
-#     "MAILGUN_API_URL": "https://api.mailgun.net/v3/sandbox223a86533e4b4620bd7786e779329498.mailgun.org/messages",
-# }
-
 # # #メールがshellに届くようにする。開発用
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-SERVER_EMAIL = env('SERVER_EMAIL')
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')

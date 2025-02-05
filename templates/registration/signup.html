@@ -3,6 +3,7 @@
 <div class="registration">
     <h1>サインアップ（新規登録）</h1>
     <div class="page_fade_in">
+        {% csrf_token %}
         {% include "_form.html" with submit_label="登録" %}
     </div>
     <br>

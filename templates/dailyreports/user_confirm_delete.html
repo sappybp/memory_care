@@ -58,15 +58,13 @@
             <p><span>権限：</span><br>閲覧作成削除管理</p>
         {% endif %}
         <div class="field_border"></div>
-        <form>
-            <div class="btn_form">
-                {% csrf_token %}
-                <input type="submit" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_delete_data" user.id %}'">
-                <label for="btn_form_btn1"><a>削除</a></label>
-                <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:user_detail" user.id %}'">
-                <label for="btn_form_btn2"><a>取消</a></label>
-            </div>
-        </form>
+        <div class="btn_form">
+            {% csrf_token %}
+            <input type="submit" id="btn_form_btn1" onclick="location.href='{% url "dailyreports:user_delete_data" user.id %}'">
+            <label for="btn_form_btn1"><a>削除</a></label>
+            <input type="button" id="btn_form_btn2" onclick="location.href='{% url "dailyreports:user_detail" user.id %}'">
+            <label for="btn_form_btn2"><a>取消</a></label>
+        </div>
     </div>
 </div>
 
