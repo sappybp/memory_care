@@ -215,7 +215,8 @@ body{
 #btn_form_btn1,
 #btn_form_btn2,
 #btn_form_btn3,
-#btn_form_btn4{
+#btn_form_btn4
+#btn_form_btn5{
   display: none;
 }
 
