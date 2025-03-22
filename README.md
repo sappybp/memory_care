@@ -1,15 +1,14 @@
 # MemoryCare
 日々の介護、福祉業務  
 その記録と経験を貯めてもっと効率よく、効果的に
-  
-https://django-render-ctqp.onrender.com/
+ 
 # 環境
 python 3.12.2  
 django 5.0.2  
 SQLite3
 
 # デプロイ
-render.com
+現在停止中
 
 # 背景
 少しずつDX化が進んできているといわれていますが、福祉業界では紙を用いて日時報告をしている施設が多いようです。
